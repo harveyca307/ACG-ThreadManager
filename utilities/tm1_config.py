@@ -44,12 +44,12 @@ def get_tm1_config(instance: str) -> dict:
             'password': password,
             'session_context': 'ACG-ThreadManager'
         }
-        return _config
+    return _config
 
 
 def create_section(instance: str, config: ConfigParser) -> dict:
     while True:
-        address = input(f"Enter address for {instance}")
+        address = input(f"Enter address for {instance}: ")
         if not address:
             print("Address is a required field")
             continue
@@ -65,10 +65,10 @@ def create_section(instance: str, config: ConfigParser) -> dict:
     ssl = str_to_bool(input(f"Does '{instance}' use ssl (default False): "))
     namespace = input(f"Enter CAM Namespace (leave empty if no CAM Security): ")
     if not namespace:
-        namespace = None
+        namespace = ''
     gateway = input("Enter Gateway URI (leave empty if no SSO): ")
     if not gateway:
-        gateway = None
+        gateway = ''
     while True:
         user = input(f"Enter username for '{instance}': ")
         if not user:
@@ -78,7 +78,7 @@ def create_section(instance: str, config: ConfigParser) -> dict:
             break
     _blank_password = str_to_bool(input(f"Does '{user}' have a blank password (default False): "))
     if _blank_password:
-        password = None
+        password = ''
     else:
         while True:
             password = getpass(f"Enter password for '{user}': ")
